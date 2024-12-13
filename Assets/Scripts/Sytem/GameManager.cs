@@ -13,17 +13,14 @@ public class GameManager : Singleton<GameManager>
     public event UIPoints OnChangeUIPoints;
 
     int _UIPoints = 0;
-
-    override public void Awake()
-    {
-        SceneManager.LoadScene("UI",LoadSceneMode.Additive);
-    }
-
-
+    bool[] _Etapes = new bool[3] { false, false, false };
 
     void Update()
     {
-        
+        if (_UIPoints >= 10 && !_Etapes[0]) {
+            Etapes[0]?.Invoke();
+            _Etapes[0] = true;
+        }
     }
 
     public void AddUIPoints(int points)
