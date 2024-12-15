@@ -7,32 +7,33 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public delegate void Etape();
-    public Etape[] Etapes = new Etape[3];
+    public Etape[] EtapeEvents = new Etape[3];
 
     public delegate void UIPoints(int pts);
     public event UIPoints OnChangeUIPoints;
 
+    [SerializeField] List<int> _steps;
     int _UIPoints = 0;
-    bool[] _Etapes = new bool[3] { false, false, false };
-    [SerializeField] private List<int> _steps;
-    private int _currentStep = 0;
+    int _currentStep = 0;
 
     #region Modules
 
-    [HideInInspector] public Business business;
+    [HideInInspector] public Business Business;
 
     #endregion
 
     override protected void Awake()
     {
         base.Awake();
-        if(_steps.Count < _Etapes.Length)
-        {
-            throw new System.Exception("Not enough values in steps list");
-        }     
-        
-        business = new Business();
 
+        EtapeEvents = new Etape[_steps.Count];
+
+        Business = GetComponent<Business>();
+    }
+
+    private void Start()
+    {
+        OnChangeUIPoints?.Invoke(_UIPoints);
     }
 
     void Update()
@@ -40,8 +41,7 @@ public class GameManager : Singleton<GameManager>
 
         if(_currentStep < _steps.Count && _UIPoints >= _steps[_currentStep])
         {
-            Etapes[_currentStep]?.Invoke();
-            _Etapes[_currentStep] = true;
+            EtapeEvents[_currentStep]?.Invoke();
             _currentStep++;
         }
     }
@@ -50,5 +50,6 @@ public class GameManager : Singleton<GameManager>
     {
         _UIPoints += points;
         OnChangeUIPoints?.Invoke(_UIPoints);
+        Business.AddUIInventory(points);
     }
 }

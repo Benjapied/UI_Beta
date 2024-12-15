@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PriceUi : TextUi
 {
-    void Update()
+    void OnEnable()
     {
-        _textMeshPro.text = "Price of UI: " + GameManager.Instance.business.CurrentUiPrice.ToString() + " $"; 
+        GameManager.Instance.Business.OnChangePriceUI += UpdateText;
     }
 }

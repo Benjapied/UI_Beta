@@ -8,7 +8,7 @@ public class Etape : MonoBehaviour
     [SerializeField] int _numberEtape;
     void Start()
     {
-        GameManager.Instance.Etapes[_numberEtape - 1] += Active;
+        GameManager.Instance.EtapeEvents[_numberEtape - 1] += Active;
     }
 
     void Active()

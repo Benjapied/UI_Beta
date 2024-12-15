@@ -2,14 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TextUi : MonoBehaviour
 {
-    protected TextMeshPro _textMeshPro;
+    protected TMP_Text _textMeshPro;
 
-    protected void Awake()
+    [SerializeField] protected string _textBefore;
+    [SerializeField] protected string _textAfter;
+
+    void Awake()
     {
-        _textMeshPro = GetComponent<TextMeshPro>(); 
+        _textMeshPro = GetComponent<TMP_Text>();
+    }
+
+    protected void UpdateText(float number)
+    {
+        _textMeshPro.text = $"{_textBefore} {number} {_textAfter}";
     }
 
 }
