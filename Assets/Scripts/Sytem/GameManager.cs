@@ -14,12 +14,35 @@ public class GameManager : Singleton<GameManager>
 
     int _UIPoints = 0;
     bool[] _Etapes = new bool[3] { false, false, false };
+    [SerializeField] private List<int> _steps;
+    private int _currentStep = 0;
+
+    #region Modules
+
+    [HideInInspector] public Business business;
+
+    #endregion
+
+    override protected void Awake()
+    {
+        base.Awake();
+        if(_steps.Count < _Etapes.Length)
+        {
+            throw new System.Exception("Not enough values in steps list");
+        }     
+        
+        business = new Business();
+
+    }
 
     void Update()
     {
-        if (_UIPoints >= 10 && !_Etapes[0]) {
-            Etapes[0]?.Invoke();
-            _Etapes[0] = true;
+
+        if(_currentStep < _steps.Count && _UIPoints >= _steps[_currentStep])
+        {
+            Etapes[_currentStep]?.Invoke();
+            _Etapes[_currentStep] = true;
+            _currentStep++;
         }
     }
 
