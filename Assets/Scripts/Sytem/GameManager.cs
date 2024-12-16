@@ -16,6 +16,8 @@ public class GameManager : Singleton<GameManager>
     int _UIPoints = 0;
     int _currentStep = 0;
 
+    float _lastUpdateTime = 0f;
+
     #region Modules
 
     [HideInInspector] public Business Business;
@@ -38,12 +40,17 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
-
         if(_currentStep < _steps.Count && _UIPoints >= _steps[_currentStep])
         {
             EtapeEvents[_currentStep]?.Invoke();
             _currentStep++;
         }
+
+        if (Time.time - _lastUpdateTime >= 1.0f) {
+            Business.UpdateBusiness();
+            _lastUpdateTime = Time.time;
+        }
+
     }
 
     public void AddUIPoints(int points)
