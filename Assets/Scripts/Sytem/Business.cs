@@ -6,13 +6,12 @@ using UnityEngine.Events;
 
 public class Business : MonoBehaviour
 {
-    public delegate void UpdateNumber(float nb);
-    public event UpdateNumber OnChangeUIInventory;
-    public event UpdateNumber OnChangePriceUI;
-    public event UpdateNumber OnChangeDemandClient;
-    public event UpdateNumber OnChangeSalesPerSecondes;
-    public event UpdateNumber OnChangeVisibility;
-    public event UpdateNumber OnChangeMoney;
+    public event GameManager.UpdateNumber OnChangeUIInventory;
+    public event GameManager.UpdateNumber OnChangePriceUI;
+    public event GameManager.UpdateNumber OnChangeDemandClient;
+    public event GameManager.UpdateNumber OnChangeSalesPerSecondes;
+    public event GameManager.UpdateNumber OnChangeVisibility;
+    public event GameManager.UpdateNumber OnChangeMoney;
 
     float _money;
     float _currentUiPrice; //Prix actuel d'un UI
@@ -23,11 +22,11 @@ public class Business : MonoBehaviour
 
     float _totalClipsSold = 0f;
 
-    public float CurrentUiPrice { get => _currentUiPrice; set => _currentUiPrice = value; }
-    public float ClientDemand { get => _clientDemand; set => _clientDemand = value; }
-    public float SalesPerSecondes { get => _salesPerSecondes; set => _salesPerSecondes = value; }
-    public int UiInventory { get => _uiInventory; set => _uiInventory = value; }
-    public int Visibility { get => _visibility; set => _visibility = value; }
+    //public float CurrentUiPrice { get => _currentUiPrice; set => _currentUiPrice = value; }
+    //public float ClientDemand { get => _clientDemand; set => _clientDemand = value; }
+    //public float SalesPerSecondes { get => _salesPerSecondes; set => _salesPerSecondes = value; }
+    //public int UiInventory { get => _uiInventory; set => _uiInventory = value; }
+    //public int Visibility { get => _visibility; set => _visibility = value; }
 
     private void Awake()
     {

@@ -3,17 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UIPoints : MonoBehaviour
+public class UIPoints : TextUi
 {
-    TMP_Text _points;
-    void Start()
+    void OnEnable()
     {
-        _points = GetComponent<TMP_Text>();
-        GameManager.Instance.OnChangeUIPoints += UpdatePoints;
-    }
-
-    void UpdatePoints(int pts)
-    {
-        _points.text = pts.ToString();
+        GameManager.Instance.OnChangeUIPoints += UpdateText;
     }
 }

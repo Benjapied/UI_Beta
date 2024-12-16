@@ -21,4 +21,9 @@ public class TextUi : MonoBehaviour
         _textMeshPro.text = $"{_textBefore} {number} {_textAfter}";
     }
 
+    protected void UpdateText(string text)
+    {
+        _textMeshPro.text = text;
+    }
+
 }

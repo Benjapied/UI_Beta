@@ -9,8 +9,10 @@ public class GameManager : Singleton<GameManager>
     public delegate void Etape();
     public Etape[] EtapeEvents = new Etape[3];
 
-    public delegate void UIPoints(int pts);
-    public event UIPoints OnChangeUIPoints;
+    public delegate void UpdateNumber(float nb);
+    public delegate void UpdateText(string text);
+
+    public event UpdateNumber OnChangeUIPoints;
 
     [SerializeField] List<int> _steps;
     int _UIPoints = 0;
@@ -21,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     #region Modules
 
     [HideInInspector] public Business Business;
+    [HideInInspector] public Shop Shop;
 
     #endregion
 
@@ -31,6 +34,7 @@ public class GameManager : Singleton<GameManager>
         EtapeEvents = new Etape[_steps.Count];
 
         Business = GetComponent<Business>();
+        Shop = GetComponent<Shop>();
     }
 
     private void Start()
