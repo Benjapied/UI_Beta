@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class TabManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class TabManager : MonoBehaviour
     public class Tab
     {
         public GameObject panel;
-        public Button button;
+        public UnityEngine.UI.Button button;
         public TMP_Text buttonText;
     }
 
@@ -43,6 +44,8 @@ public class TabManager : MonoBehaviour
 
             tabs[i].button.image.color = isActive ? selectedButtonColor : unselectedButtonColor;
             tabs[i].buttonText.color = isActive ? selectedTextColor : unselectedTextColor;
+            
+     
         }
     }
 }
