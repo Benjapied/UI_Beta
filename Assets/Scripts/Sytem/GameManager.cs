@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public delegate void Etape();
-    public Etape[] EtapeEvents = new Etape[3];
+    public Etape[] EtapeEvents;
 
     public delegate void UpdateNumber(float nb);
     public delegate void UpdateText(string text);
@@ -52,6 +52,7 @@ public class GameManager : Singleton<GameManager>
 
         if (Time.time - _lastUpdateTime >= 1.0f) {
             Business.UpdateBusiness();
+            Shop.UpdateShop();
             _lastUpdateTime = Time.time;
         }
 
