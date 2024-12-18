@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.VersionControl;
@@ -8,6 +9,8 @@ public class GameManager : Singleton<GameManager>
 {
 
     [HideInInspector] public string _name = "Mr.Propre";
+
+    public CinemachineVirtualCamera _mainCamera;
 
     public delegate void Etape();
     public Etape[] EtapeEvents;
