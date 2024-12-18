@@ -18,7 +18,7 @@ public class TextUi : MonoBehaviour
 
     protected void UpdateText(float number)
     {
-        _textMeshPro.text = $"{_textBefore} {number} {_textAfter}";
+        _textMeshPro.text = $"{_textBefore} {TMPTOOLS.ShortValue(number)} {_textAfter}";
     }
 
     protected void UpdateText(string text)

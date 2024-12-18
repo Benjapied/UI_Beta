@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+
+    [HideInInspector] public string _name = "Mr.Propre";
+
     public delegate void Etape();
     public Etape[] EtapeEvents;
 
