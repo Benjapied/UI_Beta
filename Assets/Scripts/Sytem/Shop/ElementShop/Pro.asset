@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d108acb51bce7494ebfc4b5471aadda2, type: 3}
-  m_Name: Employe
+  m_Script: {fileID: 11500000, guid: 0e36083476edca440acbff8c8e06177d, type: 3}
+  m_Name: Pro
   m_EditorClassIdentifier: 
-  Price: 10
-  _numUsine: 2
-  _numNextUsine: 3
-  _numNextUpgrade: 2
+  Title: 
+  Ratio: 0
+  Price: 0
+  Order: 0

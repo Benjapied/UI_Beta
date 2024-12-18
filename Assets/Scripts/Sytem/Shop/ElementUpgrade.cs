@@ -6,26 +6,13 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class ElementUpgrade : MonoBehaviour
 {
-
-    public event GameManager.UpdateText OnChangeDescription;
-    public event GameManager.UpdateNumber OnChangePrice;
-    public event GameManager.UpdateText OnChangeName;
-
-    Upgrade _upgrade;
+    [SerializeField] Upgrade _upgrade;
     [SerializeField] Button _button;
 
     public Upgrade Upgrade { set => _upgrade = value; }
     void Start()
     {
         _button.interactable = false;
-        Init();
-    }
-
-    void Init()
-    {
-        OnChangePrice?.Invoke(_upgrade.Price);
-        OnChangeDescription?.Invoke(_upgrade.Description);
-        OnChangeName?.Invoke(_upgrade.Title);
         GameManager.Instance.Business.OnChangeMoney += EnableButton;
     }
 

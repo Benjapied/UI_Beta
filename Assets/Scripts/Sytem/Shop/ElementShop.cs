@@ -9,17 +9,14 @@ public class ElementShop : MonoBehaviour
 {
     public event GameManager.UpdateNumber OnChangeEffectif;
     public event GameManager.UpdateNumber OnChangePrice;
-    public event GameManager.UpdateText OnChangeName;
-    public event GameManager.UpdateNumber OnChangeRatio;
 
-    ShopFrame _frame;
+    [SerializeField] ShopFrame _frame;
     [SerializeField] Button _button;
 
     int _effectif = 0;
     float _price;
     int _ratio;
 
-    public ShopFrame Frame {set => _frame = value; }
     public int Effectif { get => _effectif; }
     public int Ratio { get => _ratio; }
 
@@ -33,13 +30,14 @@ public class ElementShop : MonoBehaviour
 
     public void Revelio()
     {
-        transform.SetSiblingIndex(_frame.Order);
+        StartCoroutine(WaitNextFrame());
         _price = _frame.Price;
         _ratio = _frame.Ratio;
-        OnChangePrice?.Invoke(_price);
-        OnChangeRatio?.Invoke(_ratio);
-        OnChangeEffectif?.Invoke(_effectif);
-        OnChangeName?.Invoke(_frame.Title);
+        TextUi[] texts = GetComponentsInChildren<TextUi>();
+        texts[0].UpdateText(_frame.Title);
+        texts[1].UpdateText(_ratio);
+        texts[2].UpdateText(_effectif);
+        texts[3].UpdateText(_price);
         GameManager.Instance.Business.OnChangeMoney += EnableButton;
     }
 
@@ -52,8 +50,6 @@ public class ElementShop : MonoBehaviour
 
         _price += amount * 100f;
         OnChangePrice?.Invoke(_price);
-
-        
     }
 
     private void EnableButton(float money)
@@ -66,5 +62,10 @@ public class ElementShop : MonoBehaviour
         {
             _button.interactable = false;
         }
+    }
+
+    IEnumerator WaitNextFrame()
+    {
+        yield return 0;
     }
 }
