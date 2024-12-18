@@ -7,10 +7,12 @@ public class Usine : Upgrade
 {
     [SerializeField] int _numUsine;
     [SerializeField] int _numNextUsine;
+    [SerializeField] int _numNextUpgrade;
     public override void Do()
     {
         Shop shop = GameManager.Instance.Shop;
         shop.AddReveal(_numUsine - 1);
-        shop.Instanciate(_numNextUsine - 1);
+        shop.ActivateElementShop(_numNextUsine - 1);
+        shop.ActivateElementUpgrade(_numNextUpgrade - 1);
     }
 }

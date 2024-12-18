@@ -16,12 +16,12 @@ public class TextUi : MonoBehaviour
         _textMeshPro = GetComponent<TMP_Text>();
     }
 
-    protected void UpdateText(float number)
+    public void UpdateText(float number)
     {
         _textMeshPro.text = $"{_textBefore} {TMPTOOLS.ShortValue(number)} {_textAfter}";
     }
 
-    protected void UpdateText(string text)
+    public void UpdateText(string text)
     {
         _textMeshPro.text = text;
     }

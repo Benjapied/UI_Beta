@@ -1,45 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] ShopFrame[] _frames;
-    [SerializeField] ElementShop _prefabElementShop;
-    [SerializeField] GameObject _contentShop;
-    List<ElementShop> _elementsShop;
-
-    [SerializeField] Upgrade[] _upgrades;
-    [SerializeField] ElementUpgrade _prefabElementUpgrade;
-    [SerializeField] GameObject _contentUpgrade;
-    List<ElementUpgrade> _elementsUpgrade;
+    [SerializeField] ElementShop[] _elementsShop;
+    [SerializeField] ElementUpgrade[] _elementsUpgrade;
 
     List<int> _revealsNumber;
     GameManager manager;
     void Start()
     {
-        _revealsNumber = new List<int>();
         manager = GameManager.Instance;
+        _revealsNumber = new List<int>();
         manager.EtapeEvents[2] += RevealFirst;
-
-        _elementsShop = new List<ElementShop>();
-        for (int i = 0; i < 4; i++)
-        {
-            ElementShop element = Instantiate(_prefabElementShop, _contentShop.transform);
-            element.Frame = _frames[i];
-            _elementsShop.Add(element);
-        }
-
-        _elementsShop.Sort((a, b) => a.Order.CompareTo(b.Order));
-
-        _elementsUpgrade = new List<ElementUpgrade>();
-        for (int i = 0; i < 1; i++)
-        {
-            ElementUpgrade element = Instantiate(_prefabElementUpgrade, _contentUpgrade.transform);
-            element.Upgrade = _upgrades[i];
-            _elementsUpgrade.Add(element);
-        }
     }
 
     public void UpdateShop()
@@ -61,20 +37,19 @@ public class Shop : MonoBehaviour
 
     public void Reveal()
     {
-        _revealsNumber.Sort((a, b) => _elementsShop[a].Order.CompareTo(_elementsShop[b].Order));
         foreach (int nb in _revealsNumber)
         {
             _elementsShop[nb].Revelio();
         }
         _revealsNumber.Clear();
     }
-
-    public void Instanciate(int num)
+    public void ActivateElementShop(int num)
     {
-        ElementShop element = Instantiate(_prefabElementShop, _contentShop.transform);
-        element.Frame = _frames[num];
-        _elementsShop.Add(element);
+        _elementsShop[num].gameObject.SetActive(true);
+    }
 
-        _elementsShop.Sort((a, b) => a.Order.CompareTo(b.Order));
+    public void ActivateElementUpgrade(int num)
+    {
+        _elementsUpgrade[num].gameObject.SetActive(true);
     }
 }
