@@ -18,8 +18,10 @@ public class GameManager : Singleton<GameManager>
     public event UpdateNumber OnChangeUIPoints;
 
     [SerializeField] List<int> _steps;
-    int _UIPoints = 0;
     int _currentStep = 0;
+
+    int _energy = 100;
+    int _UIPoints = 0;
 
     float _lastUpdateTime = 0f;
 
@@ -43,12 +45,14 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         OnChangeUIPoints?.Invoke(_UIPoints);
+        Console.Instance.PrintConsole("Salut caca c'est zizi");
     }
 
     void Update()
     {
         if(_currentStep < _steps.Count && _UIPoints >= _steps[_currentStep])
         {
+            Console.Instance.PrintConsole("> Bravo vous avez atteint l'étape " + (_currentStep + 1).ToString());
             EtapeEvents[_currentStep]?.Invoke();
             _currentStep++;
         }
@@ -63,8 +67,14 @@ public class GameManager : Singleton<GameManager>
 
     public void AddUIPoints(int points)
     {
+        if (_energy <= 0) {
+            return;
+        }
+
+        _energy--;
         _UIPoints += points;
         OnChangeUIPoints?.Invoke(_UIPoints);
         Business.AddUIInventory(points);
+        
     }
 }
