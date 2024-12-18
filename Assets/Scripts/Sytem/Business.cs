@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Business : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class Business : MonoBehaviour
     float _clientDemand; //Demande du client, en pourcentage
     float _salesPerSecondes; //Nombre de ventes par secondes
     int _uiInventory; //Nombre de UI dans l'inventaire
-    int _visibility; //Visibilité, permet d'augmenter la demande client, multiplicateur de vente
+    float _visibility; //Visibilité, permet d'augmenter la demande client, multiplicateur de vente
 
     float _totalClipsSold = 0f;
 
@@ -26,7 +27,7 @@ public class Business : MonoBehaviour
     //public float ClientDemand { get => _clientDemand; set => _clientDemand = value; }
     //public float SalesPerSecondes { get => _salesPerSecondes; set => _salesPerSecondes = value; }
     //public int UiInventory { get => _uiInventory; set => _uiInventory = value; }
-    //public int Visibility { get => _visibility; set => _visibility = value; }
+    public float Visibility { get => _visibility; }
 
     private void Awake()
     {
@@ -34,7 +35,7 @@ public class Business : MonoBehaviour
         _clientDemand = 0f;
         _salesPerSecondes = 0f;
         _uiInventory = 0;
-        _visibility = 0;
+        _visibility = 1;
         _money = 0f;
     }
 
@@ -53,8 +54,9 @@ public class Business : MonoBehaviour
         _currentUiPrice += amont;
         if (_currentUiPrice > 5f) {
             _currentUiPrice = 5f;
+
         }
-        OnChangePriceUI?.Invoke(_currentUiPrice);
+        OnChangePriceUI?.Invoke(Mathf.Round(_currentUiPrice * 10f) / 10);
     }
 
     public void DecreasePrice(float amont)
@@ -64,7 +66,7 @@ public class Business : MonoBehaviour
         {
             _currentUiPrice = 0.1f;
         }
-        OnChangePriceUI?.Invoke(_currentUiPrice);
+        OnChangePriceUI?.Invoke(Mathf.Round(_currentUiPrice * 10f) / 10);
     }
 
     public void AddUIInventory(int nb)
@@ -73,6 +75,11 @@ public class Business : MonoBehaviour
         OnChangeUIInventory?.Invoke(_uiInventory);
     }
 
+    public void UpdateVisibility(float value)
+    {
+        _visibility = Mathf.Clamp(value, 0.1f, 10f);
+        OnChangeVisibility?.Invoke(_visibility);
+    }
 
     public void UpdateBusiness()
     {
@@ -88,11 +95,9 @@ public class Business : MonoBehaviour
 
     public void ChangeClientDemand()
     {
-        if (_currentUiPrice > 0.5)
-            _clientDemand = Mathf.Max(10, _clientDemand - 1.0f * Time.deltaTime);
-        else if (_currentUiPrice < 0.25)
-            _clientDemand = Mathf.Min(100, _clientDemand + 2.0f * Time.deltaTime);
 
+        _clientDemand = 20 / Mathf.Pow(_currentUiPrice, 1.5f) * _visibility;
+        
         OnChangeDemandClient?.Invoke(Mathf.Round(_clientDemand));
     }
 
