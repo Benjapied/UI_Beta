@@ -47,6 +47,9 @@ public class Business : MonoBehaviour
         OnChangeSalesPerSecondes?.Invoke(_salesPerSecondes);
         OnChangeVisibility?.Invoke(_visibility);
         OnChangeMoney?.Invoke(_money);
+
+        StartCoroutine(GetFreeMoney());
+
     }
 
     public void IncreasePrice(float amont)
@@ -116,6 +119,15 @@ public class Business : MonoBehaviour
     {
         _money -= amount;
         OnChangeMoney?.Invoke(_money);
+    }
+
+    public IEnumerator GetFreeMoney()
+    {
+        yield return new WaitForSeconds(15f);
+
+        _money += 10; //FAUT METTRE ENERGY COST
+
+        StartCoroutine(GetFreeMoney());
     }
 
 }
