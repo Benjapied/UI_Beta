@@ -23,6 +23,8 @@ public class ElementShop : MonoBehaviour
     public int Effectif { get => _effectif; }
     public int Ratio { get => _ratio; }
 
+    public int Order { get => _frame.Order; }
+
     void Start()
     {
         _button.interactable = false;
@@ -46,8 +48,12 @@ public class ElementShop : MonoBehaviour
         _effectif += amount;
         OnChangeEffectif?.Invoke(_effectif);
 
+        GameManager.Instance.Business.RemoveMoney(_price * amount);
+
         _price += amount * 100f;
         OnChangePrice?.Invoke(_price);
+
+        
     }
 
     private void EnableButton(float money)

@@ -107,4 +107,10 @@ public class Business : MonoBehaviour
         OnChangeMoney?.Invoke(Mathf.Round(_money * 100f) / 100f);
     }
 
+    public void RemoveMoney(float amount)
+    {
+        _money -= amount;
+        OnChangeMoney?.Invoke(_money);
+    }
+
 }
