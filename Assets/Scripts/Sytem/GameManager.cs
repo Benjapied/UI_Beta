@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject _secondCanva;
 
     public CinemachineVirtualCamera _mainCamera;
-    [HideInInspector] public Window CurrentWindow;
+    public Window CurrentWindow;
 
     public delegate void Etape();
     public Etape[] EtapeEvents;

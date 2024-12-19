@@ -9,6 +9,8 @@ public class Communication : MonoBehaviour
 
     private int[] _coeffTab = { 150, 150, 150, 150 };
 
+    public GameManager.UpdateNumber[] OnChangeCoeff;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,10 @@ public class Communication : MonoBehaviour
 
     public void UpdateAll()
     {
-
+        for (int i = 0; i < _coeffTab.Length; i++)
+        {
+            OnChangeCoeff[i]?.Invoke(_coeffTab[i]);
+        }
     }
 
     public void Invest(int index)
@@ -40,7 +45,7 @@ public class Communication : MonoBehaviour
                 _coeffTab[i] += 30;
             }
         }
-
+        UpdateAll();
         GameManager.Instance.Business.UpdateVisibility(_coeffTab[index]);
 
         StartCoroutine(BalanceCoeff());

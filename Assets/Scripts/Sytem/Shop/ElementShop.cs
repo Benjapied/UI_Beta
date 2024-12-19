@@ -31,14 +31,6 @@ public class ElementShop : MonoBehaviour
     public void Revelio()
     {
         StartCoroutine(WaitNextFrame());
-        _price = _frame.Price;
-        _ratio = _frame.Ratio;
-        TextUi[] texts = GetComponentsInChildren<TextUi>();
-        texts[0].UpdateText(_frame.Title);
-        texts[1].UpdateText(_ratio);
-        texts[2].UpdateText(_effectif);
-        texts[3].UpdateText(_price);
-        GameManager.Instance.Business.OnChangeMoney += EnableButton;
     }
 
     public void AddToEffectif(int amount)
@@ -67,6 +59,14 @@ public class ElementShop : MonoBehaviour
     IEnumerator WaitNextFrame()
     {
         yield return 0;
+        _price = _frame.Price;
+        _ratio = _frame.Ratio;
+        TextUi[] texts = GetComponentsInChildren<TextUi>();
+        texts[0].UpdateText(_frame.Title);
+        texts[1].UpdateText(_ratio);
+        texts[2].UpdateText(_effectif);
+        texts[3].UpdateText(_price);
+        GameManager.Instance.Business.OnChangeMoney += EnableButton;
     }
 
     public void RemoveEvent()

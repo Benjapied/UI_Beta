@@ -8,6 +8,7 @@ public class MarketWindow : Window
     {
         base.UpdateWindow();
         GameManager.Instance.Shop.UpdateAll();
+        GameManager.Instance.Shop.Reveal();
     }
 
 }
