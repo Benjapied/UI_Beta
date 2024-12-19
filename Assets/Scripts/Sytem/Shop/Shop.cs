@@ -30,7 +30,7 @@ public class Shop : MonoBehaviour
             manager.AddUIPoints(element.Effectif * element.Ratio);
         }
     }
-
+    
     void RevealFirst()
     {
         AddReveal(0);
