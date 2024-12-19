@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject _secondCanva;
 
     public CinemachineVirtualCamera _mainCamera;
+    [HideInInspector] public GameObject CurrentWindow;
 
     public delegate void Etape();
     public Etape[] EtapeEvents;
@@ -51,7 +52,6 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         OnChangeUIPoints?.Invoke(_UIPoints);
-        //Console.Instance.PrintConsole("Salut caca c'est zizi");
     }
 
     void Update()
@@ -92,6 +92,26 @@ public class GameManager : Singleton<GameManager>
         OnChangeUIPoints?.Invoke(_UIPoints);
         Business.UpdateAll();
         Shop.UpdateAll();
+    }
+
+    public void ChangeWindow(GameObject window)
+    {
+        if (CurrentWindow != null)
+        {
+            CurrentWindow.SetActive(false);
+        }
+
+        CurrentWindow = window;
+
+        if (CurrentWindow != null)
+        {
+            CurrentWindow.SetActive(true);
+        }
+    }
+
+    public void ResetWindow()
+    {
+        ChangeWindow(null);
     }
 
 }
