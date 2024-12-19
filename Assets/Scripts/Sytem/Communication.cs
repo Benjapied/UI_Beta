@@ -9,13 +9,14 @@ public class Communication : MonoBehaviour
 
     private int[] _coeffTab = { 150, 150, 150, 150 };
 
-    public GameManager.UpdateNumber[] OnChangeCoeff;
+    [SerializeField] GameObject[] _coeffs;
+
+    public GameManager.UpdateNumber[] OnChangeCoeff = new GameManager.UpdateNumber[4];
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -34,19 +35,19 @@ public class Communication : MonoBehaviour
 
     public void Invest(int index)
     {
+        GameManager.Instance.Business.UpdateVisibility(_coeffTab[index] * 0.01f);
         for(int i = 0; i < _coeffTab.Length; i++)
         {
             if(i == index)
             {
-                _coeffTab[i] -= 10;
+                _coeffTab[i] -= 30;
             }
             else
             {
-                _coeffTab[i] += 30;
+                _coeffTab[i] += 10;
             }
         }
         UpdateAll();
-        GameManager.Instance.Business.UpdateVisibility(_coeffTab[index]);
 
         StartCoroutine(BalanceCoeff());
 
@@ -70,6 +71,14 @@ public class Communication : MonoBehaviour
             GameManager.Instance.Business.UpdateVisibility(GameManager.Instance.Business.Visibility + 0.1f);
         }
         StartCoroutine(BalanceCoeff());
+    }
+
+    public void UpgradeCom()
+    {
+        foreach(GameObject coef in _coeffs)
+        {
+            coef.SetActive(true);
+        }
     }
 
 }

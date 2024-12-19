@@ -92,8 +92,8 @@ public class GameManager : Singleton<GameManager>
         _secondCanva.SetActive(true);
 
         OnChangeUIPoints?.Invoke(_UIPoints);
-        Business.UpdateAll();
         Shop.UpdateAll();
+        ResetWindow();
     }
 
     public void ChangeWindow(Window window)
