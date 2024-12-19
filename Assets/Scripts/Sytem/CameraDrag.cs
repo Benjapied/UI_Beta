@@ -12,7 +12,7 @@ public class CameraDrag : MonoBehaviour
     void Update()
     {
         // Détection du clic gauche
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.CurrentWindow == null)
         {
             dragOrigin = Input.mousePosition;
             isDragging = true;

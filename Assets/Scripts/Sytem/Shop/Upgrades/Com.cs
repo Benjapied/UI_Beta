@@ -7,5 +7,6 @@ public class Com : Upgrade
 {
     public override void Do()
     {
+        GameManager.Instance.Communication.UpgradeCom();
     }
 }

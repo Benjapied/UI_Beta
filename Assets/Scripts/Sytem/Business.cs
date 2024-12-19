@@ -132,12 +132,12 @@ public class Business : MonoBehaviour
 
     public void UpdateAll()
     {
-        OnChangePriceUI?.Invoke(_currentUiPrice);
+        OnChangePriceUI?.Invoke(Mathf.Round(_currentUiPrice * 10f) / 10);
         OnChangeUIInventory?.Invoke(_uiInventory);
-        OnChangeDemandClient?.Invoke(_clientDemand);
-        OnChangeSalesPerSecondes?.Invoke(_salesPerSecondes);
+        OnChangeDemandClient?.Invoke(Mathf.Round(_clientDemand));
+        OnChangeSalesPerSecondes?.Invoke(Mathf.Round(_salesPerSecondes * 100f) / 100f);
         OnChangeVisibility?.Invoke(_visibility);
-        OnChangeMoney?.Invoke(_money);
+        OnChangeMoney?.Invoke(Mathf.Round(_money * 100f) / 100f);
     }
 
 }

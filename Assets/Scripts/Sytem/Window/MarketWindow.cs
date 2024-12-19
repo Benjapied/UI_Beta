@@ -7,7 +7,7 @@ public class MarketWindow : Window
     public override void UpdateWindow()
     {
         base.UpdateWindow();
-        GameManager.Instance.Shop.UpdateAll();
+        GameManager.Instance.Shop.Reveal();
     }
 
 }
