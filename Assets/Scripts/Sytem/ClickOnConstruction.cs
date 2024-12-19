@@ -4,7 +4,7 @@ using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ClickOnConstruction : MonoBehaviour
+public class ClickOnConstruction : Singleton<ClickOnConstruction>
 {
 
     private Construction _currentSelectedBuilding;
@@ -17,12 +17,12 @@ public class ClickOnConstruction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.CurrentWindow == null)
         {
-            if (GameManager.Instance._currentStep > 1)
-            {
-                CheckIfClickedOutsideWindow();
-            }
+            //if (GameManager.Instance._currentStep > 1)
+            //{
+            //    CheckIfClickedOutsideWindow();
+            //}
             CheckIfBuildingClicked();
         }
     }

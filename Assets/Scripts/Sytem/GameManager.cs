@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static GameManager;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -19,10 +20,15 @@ public class GameManager : Singleton<GameManager>
     public delegate void Etape();
     public Etape[] EtapeEvents;
 
+    public delegate void UpgradeUI();
+    public event UpgradeUI OnUpgradeUI;
+
     public delegate void UpdateNumber(float nb);
     public delegate void UpdateText(string text);
 
     public event UpdateNumber OnChangeUIPoints;
+
+    [HideInInspector] public bool CleanUI = false;
 
     [SerializeField] List<int> _steps;
     [HideInInspector] public int _currentStep = 0;
@@ -90,9 +96,11 @@ public class GameManager : Singleton<GameManager>
     {
         _firstCanva.SetActive(false);
         _secondCanva.SetActive(true);
+        CleanUI = true;
 
         OnChangeUIPoints?.Invoke(_UIPoints);
         Shop.UpdateAll();
+        OnUpgradeUI?.Invoke();
         ResetWindow();
     }
 
@@ -118,6 +126,7 @@ public class GameManager : Singleton<GameManager>
     public void ResetWindow()
     {
         ChangeWindow(null);
+        ClickOnConstruction.Instance.ResetConstrcution();
     }
 
 }
