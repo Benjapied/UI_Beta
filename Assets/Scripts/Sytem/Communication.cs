@@ -22,6 +22,11 @@ public class Communication : MonoBehaviour
         
     }
 
+    public void UpdateAll()
+    {
+
+    }
+
     public void Invest(int index)
     {
         for(int i = 0; i < _coeffTab.Length; i++)

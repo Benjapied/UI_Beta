@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject _secondCanva;
 
     public CinemachineVirtualCamera _mainCamera;
-    [HideInInspector] public GameObject CurrentWindow;
+    [HideInInspector] public Window CurrentWindow;
 
     public delegate void Etape();
     public Etape[] EtapeEvents;
@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
     public event UpdateNumber OnChangeUIPoints;
 
     [SerializeField] List<int> _steps;
-    int _currentStep = 0;
+    [HideInInspector] public int _currentStep = 0;
 
     int _energy = 100;
     int _UIPoints = 0;
@@ -36,6 +36,7 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector] public Business Business;
     [HideInInspector] public Shop Shop;
+    [HideInInspector] public Communication Communication;
 
     #endregion
 
@@ -47,6 +48,7 @@ public class GameManager : Singleton<GameManager>
 
         Business = GetComponent<Business>();
         Shop = GetComponent<Shop>();
+        Communication = GetComponent<Communication>();
     }
 
     private void Start()
@@ -94,20 +96,24 @@ public class GameManager : Singleton<GameManager>
         Shop.UpdateAll();
     }
 
-    public void ChangeWindow(GameObject window)
+    public void ChangeWindow(Window window)
     {
         if (CurrentWindow != null)
         {
-            CurrentWindow.SetActive(false);
+            CurrentWindow.Disable();
+            CurrentWindow.gameObject.SetActive(false);
         }
 
         CurrentWindow = window;
 
         if (CurrentWindow != null)
         {
-            CurrentWindow.SetActive(true);
+            CurrentWindow.gameObject.SetActive(true);
+            CurrentWindow.Enable();
         }
     }
+
+    //public void CallWindowMarket() { ChangeWindow(); }
 
     public void ResetWindow()
     {

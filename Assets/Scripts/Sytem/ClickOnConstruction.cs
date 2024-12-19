@@ -19,7 +19,10 @@ public class ClickOnConstruction : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            CheckIfClickedOutsideWindow();
+            if (GameManager.Instance._currentStep > 1)
+            {
+                CheckIfClickedOutsideWindow();
+            }
             CheckIfBuildingClicked();
         }
     }
