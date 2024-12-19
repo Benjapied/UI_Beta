@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ClickOnConstruction : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    private Construction _currentSelectedBuilding;
+
     void Start()
     {
         
@@ -13,6 +16,11 @@ public class ClickOnConstruction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
@@ -24,7 +32,7 @@ public class ClickOnConstruction : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0)) { 
                 
-                    obj.OnSelected();
+                    ChangeConstruction(obj);
 
                 }
             }
@@ -35,4 +43,25 @@ public class ClickOnConstruction : MonoBehaviour
         }
 
     }
+
+    public void ChangeConstruction(Construction construction) 
+    {
+        if (_currentSelectedBuilding != null)
+        {
+            _currentSelectedBuilding.OnUnselected();
+        }
+
+        _currentSelectedBuilding = construction;
+
+        if (_currentSelectedBuilding != null)
+        {
+            _currentSelectedBuilding.OnSelected();
+        }
+    }
+
+    public void ResetConstrcution()
+    {
+        ChangeConstruction(null);
+    }
+
 }

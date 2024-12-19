@@ -48,14 +48,14 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         OnChangeUIPoints?.Invoke(_UIPoints);
-        Console.Instance.PrintConsole("Salut caca c'est zizi");
+        //Console.Instance.PrintConsole("Salut caca c'est zizi");
     }
 
     void Update()
     {
         if(_currentStep < _steps.Count && _UIPoints >= _steps[_currentStep])
         {
-            Console.Instance.PrintConsole("> Bravo vous avez atteint l'étape " + (_currentStep + 1).ToString());
+            //Console.Instance.PrintConsole("> Bravo vous avez atteint l'étape " + (_currentStep + 1).ToString());
             EtapeEvents[_currentStep]?.Invoke();
             _currentStep++;
         }
@@ -80,4 +80,5 @@ public class GameManager : Singleton<GameManager>
         Business.AddUIInventory(points);
         
     }
+
 }
