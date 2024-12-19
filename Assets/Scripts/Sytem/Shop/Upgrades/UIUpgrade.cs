@@ -7,5 +7,6 @@ public class UIUpgrade : Upgrade
 {
     public override void Do()
     {
+        GameManager.Instance.ImproveUI();
     }
 }

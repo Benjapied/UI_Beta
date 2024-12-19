@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d108acb51bce7494ebfc4b5471aadda2, type: 3}
-  m_Name: Entreprise
+  m_Name: MidJourney
   m_EditorClassIdentifier: 
   Price: 10
-  _numUsine: 5
-  _numNextUsine: 6
-  _numNextUpgrade: 4
+  _numUsine: 8
+  _numNextUsine: 9
+  _numNextUpgrade: 6

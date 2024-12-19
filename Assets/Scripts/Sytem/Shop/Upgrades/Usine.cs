@@ -12,7 +12,14 @@ public class Usine : Upgrade
     {
         Shop shop = GameManager.Instance.Shop;
         shop.AddReveal(_numUsine - 1);
-        shop.ActivateElementShop(_numNextUsine - 1);
-        shop.ActivateElementUpgrade(_numNextUpgrade - 1);
+        if(_numNextUsine != 0)
+        {
+            shop.ActivateElementShop(_numNextUsine - 1);
+        }
+        if (_numNextUpgrade != 0)
+        {
+            shop.ActivateElementUpgrade(_numNextUpgrade - 1);
+        }
+        
     }
 }

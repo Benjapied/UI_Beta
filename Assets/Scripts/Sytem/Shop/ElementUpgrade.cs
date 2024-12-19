@@ -34,4 +34,9 @@ public class ElementUpgrade : MonoBehaviour
             _button.interactable = false;
         }
     }
+
+    public void RemoveEvent()
+    {
+        GameManager.Instance.Business.OnChangeMoney -= EnableButton;
+    }
 }

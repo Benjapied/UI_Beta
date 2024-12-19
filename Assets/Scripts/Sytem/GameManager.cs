@@ -10,6 +10,9 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector] public string _name = "Mr.Propre";
 
+    [SerializeField] private GameObject _firstCanva;
+    [SerializeField] private GameObject _secondCanva;
+
     public CinemachineVirtualCamera _mainCamera;
 
     public delegate void Etape();
@@ -74,11 +77,21 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
-        _energy--;
+        //_energy--;
         _UIPoints += points;
         OnChangeUIPoints?.Invoke(_UIPoints);
         Business.AddUIInventory(points);
         
+    }
+
+    public void ImproveUI()
+    {
+        _firstCanva.SetActive(false);
+        _secondCanva.SetActive(true);
+
+        OnChangeUIPoints?.Invoke(_UIPoints);
+        Business.UpdateAll();
+        Shop.UpdateAll();
     }
 
 }

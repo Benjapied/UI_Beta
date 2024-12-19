@@ -68,4 +68,15 @@ public class ElementShop : MonoBehaviour
     {
         yield return 0;
     }
+
+    public void RemoveEvent()
+    {
+        GameManager.Instance.Business.OnChangeMoney -= EnableButton;
+    }
+
+    public void UpdateAll()
+    {
+        OnChangeEffectif?.Invoke(_effectif);
+        OnChangePrice?.Invoke(_price);
+    }
 }

@@ -130,4 +130,14 @@ public class Business : MonoBehaviour
         StartCoroutine(GetFreeMoney());
     }
 
+    public void UpdateAll()
+    {
+        OnChangePriceUI?.Invoke(_currentUiPrice);
+        OnChangeUIInventory?.Invoke(_uiInventory);
+        OnChangeDemandClient?.Invoke(_clientDemand);
+        OnChangeSalesPerSecondes?.Invoke(_salesPerSecondes);
+        OnChangeVisibility?.Invoke(_visibility);
+        OnChangeMoney?.Invoke(_money);
+    }
+
 }
